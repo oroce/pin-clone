@@ -80,4 +80,34 @@ describe( "parser", function(){
 			should.not.exist( ret );
 		});
 	});
+
+	describe( "url type", function(){
+
+		it( "should return tumblr type", function(){
+			var type = parser.type( "http://devopsreactions.tumblr.com/" );
+
+			should.exist( type );
+			type.should.strictEqual( "tumblr" );
+		});
+
+		it( "should return wordpress type", function(){
+			var type = parser.type( "http://thingsarestillfunny.wordpress.com" );
+
+			should.exist( type );
+			type.should.strictEqual( "wordpress" );
+		});
+
+		it( "should return null for not valid url", function(){
+			var type = parser.type( null );
+
+			should.strictEqual( type, null );
+		});
+
+		it( "should return null for non tumblr and wordpress url", function(){
+			var type = parser.type( "http://example.org" );
+
+			should.strictEqual( type, null );
+		});
+
+	});
 });

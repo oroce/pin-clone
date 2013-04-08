@@ -5,8 +5,8 @@ var should = require( "should" );
 
 var 
 	mongoose = require( "mongoose" ),
-	ImagesModel = require( "../../model/images" ),
-	SiteModel = require( "../../model/site" );
+	ImagesModel = require( "../../lib/model/images" ),
+	SiteModel = require( "../../lib/model/site" );
 
 mongoose.connect( process.env.MONGODB_URL );
 
