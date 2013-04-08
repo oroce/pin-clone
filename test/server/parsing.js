@@ -87,14 +87,14 @@ describe( "parser", function(){
 			var type = parser.type( "http://devopsreactions.tumblr.com/" );
 
 			should.exist( type );
-			type.should.strictEqual( "tumblr" );
+			type.should.equal( "tumblr" );
 		});
 
 		it( "should return wordpress type", function(){
 			var type = parser.type( "http://thingsarestillfunny.wordpress.com" );
 
 			should.exist( type );
-			type.should.strictEqual( "wordpress" );
+			type.should.equal( "wordpress" );
 		});
 
 		it( "should return null for not valid url", function(){

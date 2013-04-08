@@ -37,7 +37,7 @@ describe( "ImagesModel", function(){
 		instance.save(function( err, doc ){
 			should.not.exist( err );
 			should.exist( doc );
-			doc.should.have.property( "originalUrl", "http://example.org" );
+			doc.should.have.property( "originalUrl", "http://example.org/" );
 			done();
 		});
 	});
@@ -47,7 +47,7 @@ describe( "SiteModel", function(){
 
 	it( "should return with error if url isn't valid", function( done ){
 		var instance = new SiteModel({
-			url: "dummy"
+			originalUrl: "dummy"
 		});
 		instance.save(function( err ){
 			should.exist( err );
