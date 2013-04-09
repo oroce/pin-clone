@@ -16,7 +16,7 @@
   "gitHead": "8cf491a28e82b242410bd0dc2dd5f2cd474c68cf",
   "dependencies": {
     "async": "~0.2.6",
-    "mongoose-attachments": "~0.1.0",
+    "mongoose-attachments": "0.0.4",
     "express": "~3.1.1",
     "request": "~2.16.6",
     "mongoose": "~3.6.4",
@@ -25,12 +25,19 @@
     "jade": "~0.28.2",
     "config": "~0.4.22",
     "mongoose-types": "~1.0.3",
-    "libxmljs": "~0.7.1"
+    "libxmljs": "~0.7.1",
+    "grunt-cli": "~0.1.7",
+    "underscore": "~1.4.4"
   },
   "devDependencies": {
     "should": "~1.2.2",
     "mocha": "~1.9.0",
     "grunt": "~0.4.1",
-    "browserify-middleware": "~1.5.0"
+    "browserify-middleware": "~1.5.0",
+    "grunt-browserify2": "~0.1.6",
+    "grunt-s3": "~0.2.0-alpha",
+    "grunt-contrib-jshint": "~0.4.3",
+    "backbone": "~1.0.0",
+    "grunt-contrib-uglify": "~0.2.0"
   }
 }

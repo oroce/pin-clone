@@ -3,7 +3,7 @@
 
 var should = require( "should" );
 
-var 
+var
 	mongoose = require( "mongoose" ),
 	ImagesModel = require( "../../lib/model/images" ),
 	SiteModel = require( "../../lib/model/site" );

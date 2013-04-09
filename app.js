@@ -6,10 +6,25 @@ var
 	config = require( "config" ),
 	browserify = require( "browserify-middleware" ),
 	debug = require( "debug" )( "pin-clone" );
-
+	parser = require( "./lib/parser" );
 var app = express();
 
-/* 
+/*
+	db
+*/
+mongoose.connect( config.mongo, function( err ){
+	if( err ){
+		return console.error( err );
+	}
+
+	parser.refresh();
+});
+
+require( "./lib/model/images" );
+
+require( "./lib/model/site" );
+
+/*
 	configure
 */
 
@@ -24,6 +39,7 @@ app.configure(function(){
 });
 
 app.configure( "development", function(){
+	mongoose.set( "verbose", true );
 	app.use(express.logger("dev"));
 	app.use(express.errorHandler({
 		dumpExceptions: true
