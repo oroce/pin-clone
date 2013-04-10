@@ -1,12 +1,21 @@
+"use strict";
+
+/*
+	debug everything \o/
+	i know i shouldn't do this, because of this: https://gist.github.com/felixge/955659d1f1d8a530f2ff (https://github.com/felixge/node-mysql/issues/439)
+*/
+
+Error.stackTraceLimit = Infinity;
+
 var
 	http = require( "http" ),
 	path = require( "path" ),
 	express = require( "express" ),
 	mongoose = require( "mongoose" ),
 	config = require( "config" ),
-	browserify = require( "browserify-middleware" ),
-	debug = require( "debug" )( "pin-clone" );
+	debug = require( "debug" )( "pin-clone" ),
 	parser = require( "./lib/parser" );
+
 var app = express();
 
 /*
@@ -16,8 +25,9 @@ mongoose.connect( config.mongo, function( err ){
 	if( err ){
 		return console.error( err );
 	}
-
-	parser.refresh();
+	if( !process.env.NOFETCH ){
+		parser.refresh();
+	}
 });
 
 require( "./lib/model/images" );
@@ -39,7 +49,7 @@ app.configure(function(){
 });
 
 app.configure( "development", function(){
-	mongoose.set( "verbose", true );
+	mongoose.set( "debug", true );
 	app.use(express.logger("dev"));
 	app.use(express.errorHandler({
 		dumpExceptions: true
@@ -54,15 +64,24 @@ app.configure( "production", function(){
 	Routes
 */
 app.configure( "development", function(){
-	app.get( "/js/bundle.js", browserify( "./public/js/main.js" ) );
+	var
+		browserify = require( "browserify-middleware" ),
+		jadeify2 = require( "jadeify2" );
+	browserify.settings({
+		//transform: [ "jadeify2" ]
+	});
+	app.get( "/js/bundle.js", browserify( "./public/js/main.js",{
+		transform: [ function(){ console.log("jadeify2 called", arguments ); return jadeify2.apply( this, arguments );} ]
+	}));
 });
 
 var mainRoute = require( "./lib/routes/main" );
 
 app.get( "/", mainRoute.index );
 
-app.get( "/pin/:id", mainRoute.pin );
+app.get( "/pin", mainRoute.pin );
 
+app.get( "/pin/:id", mainRoute.pinById );
 /*
 	creating the http server
 */
