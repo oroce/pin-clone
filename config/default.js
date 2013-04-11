@@ -5,5 +5,6 @@ module.exports = {
 		key: process.env.S3_KEY,
 		secret: process.env.S3_SECRET,
 		bucket: "pin-clone"
-	}
+	},
+	fetchInterval: 60*1000
 };

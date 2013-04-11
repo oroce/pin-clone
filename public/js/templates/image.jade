@@ -1,4 +1,6 @@
-.pin-container.span3
+.pin-container.span3(data-id=image._id)
 	img.img-polaroid(title=image.title,src=image.small,alt=image.alt)
-	span!= image.label||image.title
-
+	p
+		i.icon-time
+		span &nbsp;
+			!= image.addedAt

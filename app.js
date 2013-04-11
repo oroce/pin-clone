@@ -46,9 +46,14 @@ app.configure(function(){
 	app.use( express.methodOverride() );
 	app.use( app.router );
 	app.use( express.static(path.join(__dirname, "public" )) );
+	app.locals({
+		scripts: [ "http://code.jquery.com/jquery-1.9.1.min.js", "//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.0/js/bootstrap.min.js" ]
+	})
 });
 
 app.configure( "development", function(){
+	app.locals.scripts.push( "/js/bundle.js" );
+
 	mongoose.set( "debug", true );
 	app.use(express.logger("dev"));
 	app.use(express.errorHandler({
@@ -57,6 +62,8 @@ app.configure( "development", function(){
 });
 
 app.configure( "production", function(){
+	app.locals.scripts.push( config.js );
+
 	app.use( express.errorHandler() );
 });
 

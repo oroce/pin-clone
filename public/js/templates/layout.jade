@@ -3,12 +3,25 @@ html
 	head
 		title!= title
 		meta(name="viewport",content="width=device-width, initial-scale=1.0")
-		link(rel="stylesheet", href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-responsive.min.css")
+		link(rel="stylesheet", href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.0/css/bootstrap-combined.min.css")
 	body
-		.container.image-container
+		.navbar.navbar-inverse.navbar-fixed-top
+			.navbar-inner
+				.container
+					a.brand(href="/") pin-clone
+					.nav-collapse.collapse
+						ul.nav
+							li
+								a(href="https://github.com/oroce/pin-clone") Checkout code
+							li
+								a(href="https://twitter.com/oroce") @oroce
+							li
+								a(href="https://github.com/oroce") oroce on GitHub
 
-		footer.footer
-			.container
+		.container
+			.image-container.row
+			hr
+			.footer
 				p Built lovely in Budapest <3
-		script(src="http://code.jquery.com/jquery-1.9.1.min.js")
-		script(src="/js/bundle.js")
+		- each script in scripts
+			script(src=script)

@@ -1,10 +1,11 @@
 {
   "name": "pin-clone",
-  "version": "0.0.0",
+  "version": "0.0.4-6",
   "description": "pin-clone =========",
   "main": "index.js",
   "scripts": {
-    "test": "mocha ./test/**/*"
+    "test": "mocha ./test/**/*",
+    "start": "node app.js"
   },
   "repository": {
     "type": "git",
@@ -27,7 +28,8 @@
     "mongoose-types": "~1.0.3",
     "libxmljs": "~0.7.1",
     "grunt-cli": "~0.1.7",
-    "underscore": "~1.4.4"
+    "underscore": "~1.4.4",
+    "moment": "~2.0.0"
   },
   "devDependencies": {
     "should": "~1.2.2",
@@ -39,6 +41,11 @@
     "grunt-contrib-jshint": "~0.4.3",
     "backbone": "~1.0.0",
     "grunt-contrib-uglify": "~0.2.0",
-    "jadeify2": "0.0.1"
+    "jadeify2": "0.0.1",
+    "grunt-bump": "0.0.2"
+  },
+  "subdomain": "oroce-pin-clone",
+  "engines": {
+    "node": "0.8.x"
   }
 }

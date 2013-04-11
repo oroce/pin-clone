@@ -1,7 +1,19 @@
 "use strict";
 
 module.exports = function(grunt) {
-	console.log( process.env );
+	grunt.registerTask( "reload-pkg", function(){
+		grunt.config.set("pkg", grunt.file.readJSON("package.json"))
+	});
+	grunt.registerTask( "writeconfig", function(){
+		var currentConfig;
+		if( grunt.file.exists( "./config/production.json" ) ){
+			currentConfig = grunt.file.readJSON( "./config/production.json" );
+		}
+		currentConfig = currentConfig || {};
+		currentConfig.js = grunt.template.process( "http://pin-clone.s3.amazonaws.com/static/<%= pkg.name %>-<%= pkg.version %>.min.js" );
+
+		grunt.file.write( "./config/production.json", JSON.stringify( currentConfig ) );
+	});
 	// Project configuration.
 	grunt.initConfig({
 		// Metadata.
@@ -57,6 +69,9 @@ module.exports = function(grunt) {
 		},
 		browserify2: {
 			compile: {
+				beforeHook: function(bundle){
+					bundle.transform( require( "jadeify2" ) );
+				},
 				compile: "./build/<%= pkg.name %>-<%= pkg.version %>.js",
 				entry: "./public/js/main.js",
 				require: true
@@ -69,10 +84,11 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks( "grunt-contrib-uglify" );
 	grunt.loadNpmTasks( "grunt-contrib-jshint" );
 	grunt.loadNpmTasks( "grunt-browserify2" );
-	grunt.loadNpmTasks( "grunt-s3");
+	grunt.loadNpmTasks( "grunt-s3" );
+	grunt.loadNpmTasks( "grunt-bump" );
 	// Default task.
 	//grunt.registerTask("default", ["jshint", "nodeunit", "concat", "uglify"]);
 
-	grunt.registerTask( "build", [ "jshint", "browserify2:compile", "uglify:dist", "s3:build"])
+	grunt.registerTask( "build", [ "jshint", "bump", "reload-pkg", "browserify2:compile", "uglify:dist", "writeconfig","s3:build" ])
 
 };
