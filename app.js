@@ -97,11 +97,16 @@ app.get( "/pin/:id", mainRoute.pinById );
 	creating the http server
 */
 
-var server = http.createServer( app );
+if( module.parent ){
+	module.exports = app;
+}
+else{
+	var server = http.createServer( app );
 
-server.listen( config.port, function( err ){
-	if( err ){
-		return console.error( "Couldn't start server, reason: ", err );
-	}
-	console.log( "Server is running:", server.address().address + ":" + server.address().port );
-});
+	server.listen( config.port, function( err ){
+		if( err ){
+			return console.error( "Couldn't start server, reason: ", err );
+		}
+		console.log( "Server is running:", server.address().address + ":" + server.address().port );
+	});
+}

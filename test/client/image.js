@@ -2,8 +2,8 @@
 "use strict";
 var
 	should = require( "should" ),
-	ImageModel = require( "../../public/js/image" ),
-	ImagesCollection = require( "../../public/js/images" );
+	ImageModel = require( "../../public/js/models/image" ),
+	ImagesCollection = require( "../../public/js/collections/images" );
 
 describe( "ImagesCollection", function(){
 

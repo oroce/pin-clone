@@ -44,7 +44,8 @@
     "jadeify2": "git://github.com/oroce/node-jadeify2.git",
     "grunt-bump": "0.0.2",
     "grunt-contrib-cssmin": "~0.6.0",
-    "grunt-contrib-clean": "~0.4.0"
+    "grunt-contrib-clean": "~0.4.0",
+    "supertest": "~0.5.1"
   },
   "subdomain": "oroce-pin-clone",
   "engines": {

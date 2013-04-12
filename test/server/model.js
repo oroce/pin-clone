@@ -8,7 +8,14 @@ var
 	ImagesModel = require( "../../lib/model/images" ),
 	SiteModel = require( "../../lib/model/site" );
 
-mongoose.connect( process.env.MONGODB_URL );
+before(function(){
+	mongoose.connection.on( "error", function() {});
+	mongoose.connect( process.env.MONGODB_URL );
+});
+
+after(function( done ){
+	mongoose.disconnect( done );
+});
 
 describe( "ImagesModel", function(){
 

@@ -7,31 +7,6 @@ var parser = require( "../../lib/parser" );
 
 describe( "parser", function(){
 
-	describe( "image parsing", function(){
-
-		it( "should find one image", function(){
-			var ret = parser.getImages( "<div><img src='dummy' /></div>" );
-			should.exist( ret );
-			ret.should.be.instanceof( Array ).and.have.length( 1 );
-
-			var img = ret[ 0 ];
-			should.exist( img );
-			img.should.have.property( "src", "dummy" );
-		});
-
-		it( "should not throw error", function(){
-			(function(){
-				parser.getImages( null );
-			}).should.not.throw();
-		});
-
-		it( "should return null", function(){
-			var ret = parser.getImages( "<div></div>" );
-			should.not.exist( ret );
-		});
-
-	});
-
 	describe( "url normalize", function(){
 
 		it( "should handle absolute url", function(){
