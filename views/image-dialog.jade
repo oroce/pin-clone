@@ -1,11 +1,11 @@
 .modal-header
 	button.close(type="button") ×
-.modal-body
+.modal-body.show-image
 	a(href=image.originalUrl,target="_blank")
 		img(src=image.medium)
 	p
 		i.icon-time
-		span &nbsp;
+		span.image-added
 			!= image.addedAt
 	p
 		a(href=image.articleUrl,target="_blank") Check out the original page

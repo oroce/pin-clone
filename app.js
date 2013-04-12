@@ -25,6 +25,9 @@ mongoose.connect( config.mongo, function( err ){
 	if( err ){
 		return console.error( err );
 	}
+
+	debug( "mongodb connected" );
+
 	if( !process.env.NOFETCH ){
 		parser.refresh();
 	}
@@ -47,13 +50,14 @@ app.configure(function(){
 	app.use( app.router );
 	app.use( express.static(path.join(__dirname, "public" )) );
 	app.locals({
-		scripts: [ "http://code.jquery.com/jquery-1.9.1.min.js", "//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.0/js/bootstrap.min.js" ]
-	})
+		scripts: [ "http://code.jquery.com/jquery-1.9.1.min.js", "//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.0/js/bootstrap.min.js" ],
+		styles: [ "//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.0/css/bootstrap-combined.min.css" ]
+	});
 });
 
 app.configure( "development", function(){
 	app.locals.scripts.push( "/js/bundle.js" );
-
+	app.locals.styles.push( "/css/style.css" );
 	mongoose.set( "debug", true );
 	app.use(express.logger("dev"));
 	app.use(express.errorHandler({
@@ -63,7 +67,7 @@ app.configure( "development", function(){
 
 app.configure( "production", function(){
 	app.locals.scripts.push( config.js );
-
+	app.locals.styles.push( config.css );
 	app.use( express.errorHandler() );
 });
 

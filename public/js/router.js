@@ -21,7 +21,7 @@ var Router = Backbone.Router.extend({
 		}
 		if( !model ){
 			model = new ImageModel({
-				id: id
+				_id: id
 			});
 		}
 

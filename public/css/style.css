@@ -1,0 +1,13 @@
+.main{
+	margin-top: 50px;
+}
+.image-added{
+	margin-left: 3px;
+}
+.show-image{
+	max-height: 800px;
+	max-width: 800px;
+}
+.modal-header{
+	height: 20px;
+}

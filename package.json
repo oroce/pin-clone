@@ -1,6 +1,6 @@
 {
   "name": "pin-clone",
-  "version": "0.0.4-6",
+  "version": "0.0.4-7",
   "description": "pin-clone =========",
   "main": "index.js",
   "scripts": {
@@ -41,8 +41,10 @@
     "grunt-contrib-jshint": "~0.4.3",
     "backbone": "~1.0.0",
     "grunt-contrib-uglify": "~0.2.0",
-    "jadeify2": "0.0.1",
-    "grunt-bump": "0.0.2"
+    "jadeify2": "git@github.com:oroce/node-jadeify2.git",
+    "grunt-bump": "0.0.2",
+    "grunt-contrib-cssmin": "~0.6.0",
+    "grunt-contrib-clean": "~0.4.0"
   },
   "subdomain": "oroce-pin-clone",
   "engines": {

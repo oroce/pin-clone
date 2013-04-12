@@ -3,7 +3,8 @@ html
 	head
 		title!= title
 		meta(name="viewport",content="width=device-width, initial-scale=1.0")
-		link(rel="stylesheet", href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.0/css/bootstrap-combined.min.css")
+		- each style in styles
+			link(rel="stylesheet", href=style)
 	body
 		.navbar.navbar-inverse.navbar-fixed-top
 			.navbar-inner
@@ -12,13 +13,13 @@ html
 					.nav-collapse.collapse
 						ul.nav
 							li
-								a(href="https://github.com/oroce/pin-clone") Checkout code
+								a(href="https://github.com/oroce/pin-clone") code
 							li
 								a(href="https://twitter.com/oroce") @oroce
 							li
 								a(href="https://github.com/oroce") oroce on GitHub
 
-		.container
+		.container.main
 			.image-container.row
 			hr
 			.footer

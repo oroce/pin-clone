@@ -9,9 +9,9 @@ var ImageModel = Backbone.Model.extend({
 			throw new ImageModel.MissingIdError( attrs );
 		}
 
-		if( !this.get( "originalUrl") ){
+		/*if( !this.get( "originalUrl") ){
 			throw new ImageModel.MissingOriginalUrl();
-		}
+		}*/
 	},
 	idAttribute: "_id",
 	urlRoot: "/pin"

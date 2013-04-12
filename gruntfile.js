@@ -2,7 +2,7 @@
 
 module.exports = function(grunt) {
 	grunt.registerTask( "reload-pkg", function(){
-		grunt.config.set("pkg", grunt.file.readJSON("package.json"))
+		grunt.config.set("pkg", grunt.file.readJSON( "package.json" ) );
 	});
 	grunt.registerTask( "writeconfig", function(){
 		var currentConfig;
@@ -11,7 +11,7 @@ module.exports = function(grunt) {
 		}
 		currentConfig = currentConfig || {};
 		currentConfig.js = grunt.template.process( "http://pin-clone.s3.amazonaws.com/static/<%= pkg.name %>-<%= pkg.version %>.min.js" );
-
+		currentConfig.css = grunt.template.process( "http://pin-clone.s3.amazonaws.com/static/<%= pkg.name %>-<%= pkg.version %>.min.css" );
 		grunt.file.write( "./config/production.json", JSON.stringify( currentConfig ) );
 	});
 	// Project configuration.
@@ -44,7 +44,7 @@ module.exports = function(grunt) {
 				options: {
 					jshintrc: "./.jshintrc"
 				},
-				src: ["lib/**/*.js"]
+				src: ["lib/**/*.js", "./*.js"]
 			},
 			test: {
 				src: ["test/**/*.js"]
@@ -63,6 +63,10 @@ module.exports = function(grunt) {
 					{
 						src: "./build/<%= pkg.name %>-<%= pkg.version %>.min.js",
 						dest: "static/<%= pkg.name %>-<%= pkg.version %>.min.js"
+					},
+					{
+						src: "./build/<%= pkg.name %>-<%= pkg.version %>.min.css",
+						dest: "static/<%= pkg.name %>-<%= pkg.version %>.min.css"
 					}
 				]
 			}
@@ -76,7 +80,17 @@ module.exports = function(grunt) {
 				entry: "./public/js/main.js",
 				require: true
 			}
-	}
+		},
+		cssmin: {
+			compress: {
+				files: {
+					"./build/<%= pkg.name %>-<%= pkg.version %>.min.css": [ "public/css/style.css" ]
+				}
+			}
+		},
+		clean: {
+			build: [ "build/" ]
+		}
 	});
 
 	// These plugins provide necessary tasks.
@@ -86,9 +100,11 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks( "grunt-browserify2" );
 	grunt.loadNpmTasks( "grunt-s3" );
 	grunt.loadNpmTasks( "grunt-bump" );
+	grunt.loadNpmTasks( "grunt-contrib-cssmin" );
+	grunt.loadNpmTasks( "grunt-contrib-clean" );
 	// Default task.
 	//grunt.registerTask("default", ["jshint", "nodeunit", "concat", "uglify"]);
 
-	grunt.registerTask( "build", [ "jshint", "bump", "reload-pkg", "browserify2:compile", "uglify:dist", "writeconfig","s3:build" ])
+	grunt.registerTask( "build", [ "clean", "jshint", "bump", "reload-pkg", "browserify2:compile", "uglify:dist", "cssmin", "writeconfig","s3:build", "clean" ] );
 
 };
